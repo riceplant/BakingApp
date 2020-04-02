@@ -1,11 +1,14 @@
 package com.riceplant.bakingapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Recipe {
+public class Recipe implements Parcelable {
     @SerializedName("id")
     @Expose
     private Integer mId;
@@ -24,6 +27,33 @@ public class Recipe {
     @SerializedName("image")
     @Expose
     private String mImage;
+
+    protected Recipe(Parcel in) {
+        if (in.readByte() == 0) {
+            mId = null;
+        } else {
+            mId = in.readInt();
+        }
+        mName = in.readString();
+        if (in.readByte() == 0) {
+            mServings = null;
+        } else {
+            mServings = in.readInt();
+        }
+        mImage = in.readString();
+    }
+
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
 
     public Integer getId() {
         return mId;
@@ -73,4 +103,26 @@ public class Recipe {
         mImage = image;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (mId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(mId);
+        }
+        dest.writeString(mName);
+        if (mServings == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(mServings);
+        }
+        dest.writeString(mImage);
+    }
 }

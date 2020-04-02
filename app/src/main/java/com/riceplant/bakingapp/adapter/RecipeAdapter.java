@@ -14,6 +14,9 @@ import com.riceplant.bakingapp.model.Recipe;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private List<Recipe> mRecipeList;
@@ -46,11 +49,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     public class RecipeViewHolder extends RecyclerView.ViewHolder {
-        TextView mRecipeName;
+        @BindView(R.id.recipe_name) TextView mRecipeName;
 
         public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);
-            mRecipeName = (TextView) itemView.findViewById(R.id.recipe_name);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
