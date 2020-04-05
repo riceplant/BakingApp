@@ -1,13 +1,16 @@
-package com.riceplant.bakingapp;
+package com.riceplant.bakingapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.riceplant.bakingapp.R;
 import com.riceplant.bakingapp.adapter.RecipeAdapter;
 import com.riceplant.bakingapp.model.Recipe;
 import com.riceplant.bakingapp.network.RecipeClient;
@@ -19,16 +22,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.RecipeAdapterOnClickHandler{
+    private static final String TAG = RecipeActivity.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
     private RecipeAdapter mRecipeAdapter;
+    private List<Recipe> recipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_recipe);
 
         RecipeService service = RecipeClient.getRetrofit().create(RecipeService.class);
 
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecipeActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 Log.v(TAG, t.toString());
             }
         });
@@ -49,11 +53,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateDataList(List<Recipe> recipeList) {
         mRecyclerView = findViewById(R.id.recipe_recycler_view);
-        mRecipeAdapter = new RecipeAdapter(this, recipeList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        mRecipeAdapter = new RecipeAdapter(this, recipeList, RecipeActivity.this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecipeActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mRecipeAdapter);
     }
 
 
+    @Override
+    public void onClick(int adapterPosition) {
+        Context context = this;
+        Class detailClass = RecipeDetailsActivity.class;
+
+        Intent detailsIntent = new Intent(context, detailClass);
+        startActivity(detailsIntent);
+    }
 }
