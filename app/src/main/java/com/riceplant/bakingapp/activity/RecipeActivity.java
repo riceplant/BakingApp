@@ -1,14 +1,14 @@
 package com.riceplant.bakingapp.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.riceplant.bakingapp.R;
 import com.riceplant.bakingapp.adapter.RecipeAdapter;
@@ -29,6 +29,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
     private RecipeAdapter mRecipeAdapter;
     private List<Recipe> recipes;
 
+    public static final String MY_RECIPE = "myRecipe";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,10 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         call.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                generateDataList(response.body());
+                if (response.isSuccessful()) {
+                    generateDataList(response.body());
+                    recipes = response.body();
+                }
             }
 
             @Override
@@ -66,6 +71,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         Class detailClass = RecipeDetailsActivity.class;
 
         Intent detailsIntent = new Intent(context, detailClass);
+        detailsIntent.putExtra(MY_RECIPE, recipes.get(adapterPosition));
         startActivity(detailsIntent);
     }
 }
