@@ -34,8 +34,10 @@ public class RecipeDetailsActivity extends AppCompatActivity implements Ingredie
     private List<Ingredient> ingredientList = new ArrayList<>();
     IngredientAdapter mAdapter;
 
+    @Nullable
     @BindView(R.id.ingredients)
     TextView ingredientsTV;
+    @Nullable
     @BindView(R.id.quantity)
     TextView quantityTV;
     @BindView(R.id. recipe_details_rv)
@@ -51,10 +53,13 @@ public class RecipeDetailsActivity extends AppCompatActivity implements Ingredie
 
         recipeName = recipes.getName();
         ingredientList = recipes.getIngredients();
-        ingredient = ingredientList.get(0).getIngredient();
-        quantity = ingredientList.get(0).getQuantity();
-        measure = ingredientList.get(0).getMeasure();
-
+        if (ingredientList != null) {
+            ingredient = ingredientList.get(0).getIngredient();
+            quantity = ingredientList.get(0).getQuantity();
+            measure = ingredientList.get(0).getMeasure();
+        } else {
+            Log.v(TAG, "FAILING LOADING INGREDIENTSLIST");
+        }
         setTitle(recipeName);
 
         ButterKnife.bind(this);
