@@ -38,6 +38,8 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         TextView ingredientTextView;
         @BindView(R.id.step_description)
         TextView stepsDescriptionTextView;
+        @BindView(R.id.quantity)
+        TextView quantityDescriptionTextView;
 
         public IngredientAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +65,8 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     public void onBindViewHolder(@NonNull IngredientAdapterViewHolder holder, int position) {
         holder.ingredientTextView.setText(mIngredient.get(position).getIngredient());
         holder.stepsDescriptionTextView.setText(mIngredient.get(position).getQuantity().toString());
+        holder.quantityDescriptionTextView.setText(mIngredient.get(position).getMeasure());
+
     }
 
     @Override

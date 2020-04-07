@@ -20,6 +20,8 @@ import com.riceplant.bakingapp.network.RecipeService;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +29,9 @@ import retrofit2.Response;
 public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.RecipeAdapterOnClickHandler{
     private static final String TAG = RecipeActivity.class.getSimpleName();
 
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.recipe_recycler_view)
+    RecyclerView mRecyclerView;
+
     private RecipeAdapter mRecipeAdapter;
     private List<Recipe> recipes;
 
@@ -47,9 +51,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
                 if (response.isSuccessful()) {
                     recipes = response.body();
                     generateDataList(recipes);
-                    List<Ingredient> ingredients = recipes.get(0).getIngredients();
-                    String pups = ingredients.get(0).getIngredient();
-                    Log.v(TAG, pups);
                 }
             }
 
@@ -62,7 +63,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
     }
 
     private void generateDataList(List<Recipe> recipeList) {
-        mRecyclerView = findViewById(R.id.recipe_recycler_view);
+        ButterKnife.bind(this);
         mRecipeAdapter = new RecipeAdapter(this, recipeList, RecipeActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecipeActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);

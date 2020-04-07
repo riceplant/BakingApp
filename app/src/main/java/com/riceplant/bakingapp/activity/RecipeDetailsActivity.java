@@ -32,11 +32,14 @@ public class RecipeDetailsActivity extends AppCompatActivity implements Ingredie
     private Double quantity;
     private String measure;
     private List<Ingredient> ingredientList = new ArrayList<>();
-    RecyclerView mRecyclerView;
     IngredientAdapter mAdapter;
 
     @BindView(R.id.ingredients)
     TextView ingredientsTV;
+    @BindView(R.id.quantity)
+    TextView quantityTV;
+    @BindView(R.id. recipe_details_rv)
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,20 +50,15 @@ public class RecipeDetailsActivity extends AppCompatActivity implements Ingredie
         recipes = intentToCatch.getParcelableExtra(RecipeActivity.MY_RECIPE);
 
         recipeName = recipes.getName();
-
-        for (int i = 0; i < ingredientList.size(); i++) {
-            ingredient = ingredientList.get(i).getIngredient();
-            quantity = ingredientList.get(i).getQuantity();
-            measure = ingredientList.get(i).getMeasure();
-        }
+        ingredientList = recipes.getIngredients();
         ingredient = ingredientList.get(0).getIngredient();
-        Log.v(TAG, ingredient);
+        quantity = ingredientList.get(0).getQuantity();
+        measure = ingredientList.get(0).getMeasure();
 
         setTitle(recipeName);
 
+        ButterKnife.bind(this);
 
-
-        mRecyclerView = findViewById(R.id.recipe_details_rv);
         mAdapter = new IngredientAdapter(this, ingredientList, RecipeDetailsActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecipeDetailsActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
