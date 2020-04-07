@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.riceplant.bakingapp.R;
 import com.riceplant.bakingapp.adapter.RecipeAdapter;
+import com.riceplant.bakingapp.model.Ingredient;
 import com.riceplant.bakingapp.model.Recipe;
 import com.riceplant.bakingapp.network.RecipeClient;
 import com.riceplant.bakingapp.network.RecipeService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,8 +45,11 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 if (response.isSuccessful()) {
-                    generateDataList(response.body());
                     recipes = response.body();
+                    generateDataList(recipes);
+                    List<Ingredient> ingredients = recipes.get(0).getIngredients();
+                    String pups = ingredients.get(0).getIngredient();
+                    Log.v(TAG, pups);
                 }
             }
 

@@ -34,6 +34,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         void onClick(int adapterPosition);
     }
 
+    public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        @BindView(R.id.recipe_name)
+        TextView mRecipeName;
+
+        public RecipeAdapterViewHolder(@NonNull View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+            ButterKnife.bind(this, itemView);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            mOnClickHandler.onClick(adapterPosition);
+        }
+
+    }
+
     @NonNull
     @Override
     public RecipeAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,21 +71,5 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
             return 0;
         }
         return mRecipeList.size();
-    }
-
-    public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        @BindView(R.id.recipe_name) TextView mRecipeName;
-
-        public RecipeAdapterViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-            ButterKnife.bind(this, itemView);
-        }
-
-        @Override
-        public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
-            mOnClickHandler.onClick(adapterPosition);
-        }
     }
 }
