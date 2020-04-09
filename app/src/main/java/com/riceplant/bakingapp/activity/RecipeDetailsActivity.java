@@ -21,11 +21,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.riceplant.bakingapp.activity.RecipeActivity.MY_RECIPE;
+
 public class RecipeDetailsActivity extends AppCompatActivity implements IngredientAdapter.IngredientAdapterOnClickHandler{
     private static final String TAG = RecipeDetailsActivity.class.getSimpleName();
 
-    private Recipe recipes;
-    private List<Recipe> recipeList;
+    public static Recipe recipes;
+    private ArrayList<Recipe> recipeList;
 
     private String recipeName;
     private String ingredient;
@@ -49,7 +51,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements Ingredie
         setContentView(R.layout.activity_recipe_details);
 
         Intent intentToCatch = getIntent();
-        recipes = intentToCatch.getParcelableExtra(RecipeActivity.MY_RECIPE);
+        recipeList = intentToCatch.getParcelableArrayListExtra(MY_RECIPE);
 
         recipeName = recipes.getName();
         ingredientList = recipes.getIngredients();
