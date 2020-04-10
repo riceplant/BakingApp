@@ -36,7 +36,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     public class IngredientAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.ingredients)
         TextView ingredientTextView;
-        @BindView(R.id.step_description)
+        @BindView(R.id.measure)
         TextView stepsDescriptionTextView;
         @BindView(R.id.quantity)
         TextView quantityDescriptionTextView;

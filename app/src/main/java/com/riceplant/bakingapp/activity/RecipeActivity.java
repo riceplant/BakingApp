@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.riceplant.bakingapp.R;
 import com.riceplant.bakingapp.adapter.RecipeAdapter;
-import com.riceplant.bakingapp.model.Ingredient;
 import com.riceplant.bakingapp.model.Recipe;
 import com.riceplant.bakingapp.network.RecipeClient;
 import com.riceplant.bakingapp.network.RecipeService;
@@ -74,8 +73,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
     @Override
     public void onClick(int adapterPosition) {
         Context context = this;
-        Class detailClass = RecipeDetailsActivity.class;
-        RecipeDetailsActivity.recipes = recipes.get(adapterPosition);
+        Class detailClass = IngredientActivity.class;
+        IngredientActivity.recipes = recipes.get(adapterPosition);
 
         Intent detailsIntent = new Intent(context, detailClass);
         detailsIntent.putParcelableArrayListExtra(MY_RECIPE, recipes);

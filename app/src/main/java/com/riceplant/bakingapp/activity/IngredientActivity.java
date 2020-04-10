@@ -23,8 +23,8 @@ import butterknife.ButterKnife;
 
 import static com.riceplant.bakingapp.activity.RecipeActivity.MY_RECIPE;
 
-public class RecipeDetailsActivity extends AppCompatActivity implements IngredientAdapter.IngredientAdapterOnClickHandler{
-    private static final String TAG = RecipeDetailsActivity.class.getSimpleName();
+public class IngredientActivity extends AppCompatActivity implements IngredientAdapter.IngredientAdapterOnClickHandler{
+    private static final String TAG = IngredientActivity.class.getSimpleName();
 
     public static Recipe recipes;
     private ArrayList<Recipe> recipeList;
@@ -66,8 +66,8 @@ public class RecipeDetailsActivity extends AppCompatActivity implements Ingredie
 
         ButterKnife.bind(this);
 
-        mAdapter = new IngredientAdapter(this, ingredientList, RecipeDetailsActivity.this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecipeDetailsActivity.this);
+        mAdapter = new IngredientAdapter(this, ingredientList, IngredientActivity.this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(IngredientActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
