@@ -33,7 +33,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         void onClick(int adapterPosition);
     }
 
-    public class IngredientAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class IngredientAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.ingredients)
         TextView ingredientTextView;
         @BindView(R.id.measure)
@@ -57,7 +57,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     @Override
     public IngredientAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recipe_details_list_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.ingredient_list_item, parent, false);
         return new IngredientAdapterViewHolder(view);
     }
 

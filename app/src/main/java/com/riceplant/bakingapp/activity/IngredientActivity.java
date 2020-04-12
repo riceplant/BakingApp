@@ -34,7 +34,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientA
     private Double quantity;
     private String measure;
     private List<Ingredient> ingredientList = new ArrayList<>();
-    IngredientAdapter mAdapter;
+    private IngredientAdapter mAdapter;
 
     @Nullable
     @BindView(R.id.ingredients)

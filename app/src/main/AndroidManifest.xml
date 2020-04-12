@@ -22,6 +22,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.RecipeDetailsActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".activity.RecipeActivity" />
+        <activity
             android:name=".activity.IngredientActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".activity.RecipeActivity" />
