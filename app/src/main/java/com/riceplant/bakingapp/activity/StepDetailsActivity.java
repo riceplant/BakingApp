@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Log;
 import com.google.android.exoplayer2.util.Util;
 import com.riceplant.bakingapp.R;
 import com.riceplant.bakingapp.model.Recipe;
@@ -24,21 +26,31 @@ import com.riceplant.bakingapp.model.Step;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.riceplant.bakingapp.activity.RecipeActivity.MY_RECIPE;
 
 public class StepDetailsActivity extends AppCompatActivity {
+    public static final String TAG = StepDetailsActivity.class.getSimpleName();
 
     public static Recipe recipes;
+    public static Step steps;
     private ArrayList<Recipe> recipeArrayList;
-    private List<Step> stepList = new ArrayList<>();
     private String recipeName;
     private String videoURL;
+    private String mDescription;
+    private Uri uri;
 
-    private PlayerView playerView;
     private SimpleExoPlayer player;
     private boolean playWhenReady = true;
     private int currentWindow = 0;
     private long playbackPosition = 0;
+
+    @BindView(R.id.exo_player_view)
+    PlayerView playerView;
+    @BindView(R.id.step_detail_description)
+    TextView descriptionView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,15 +58,13 @@ public class StepDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_steps_detail);
 
         Intent intentToCatch = getIntent();
-        recipeArrayList = intentToCatch.getParcelableArrayListExtra(MY_RECIPE);
+        // recipeArrayList = intentToCatch.getParcelableArrayListExtra(MY_RECIPE);
 
-        recipeName = recipes.getName();
-        setTitle(recipeName);
+        videoURL = steps.getVideoURL();
+        mDescription = steps.getDescription();
 
-        stepList = recipes.getSteps();
-        if (stepList != null) {
-            videoURL = stepList.get(0).getVideoURL();
-        }
+        ButterKnife.bind(this);
+        descriptionView.setText(mDescription);
     }
 
     @Override
@@ -103,7 +113,11 @@ public class StepDetailsActivity extends AppCompatActivity {
     private void initializePlayer() {
         player = ExoPlayerFactory.newSimpleInstance(this);
         playerView.setPlayer(player);
-        Uri uri = Uri.parse(videoURL);
+        if (videoURL != null) {
+            uri = Uri.parse(videoURL);
+        } else {
+            playerView.setVisibility(View.INVISIBLE);
+        }
         MediaSource mediaSource = buildMediaSource(uri);
         player.setPlayWhenReady(playWhenReady);
         player.seekTo(currentWindow, playbackPosition);

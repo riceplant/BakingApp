@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +28,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
     public static Recipe recipes;
     private ArrayList<Recipe> recipeArrayList;
-    private List<Step> stepArrayList = new ArrayList<>();
+    private List<Step> stepList = new ArrayList<>();
 
     private String recipeName;
     private String mStepId;
@@ -44,15 +43,12 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
 
-        Intent intentToCatch = getIntent();
-        recipeArrayList = intentToCatch.getParcelableArrayListExtra(MY_RECIPE);
-
         recipeName = recipes.getName();
-        stepArrayList = recipes.getSteps();
+        stepList = recipes.getSteps();
 
-        if (stepArrayList != null) {
-            mStepId = stepArrayList.get(0).getId().toString();
-            mShortDescription = stepArrayList.get(0).getShortDescription();
+        if (stepList != null) {
+            mStepId = stepList.get(0).getId().toString();
+            mShortDescription = stepList.get(0).getShortDescription();
         } else {
             Log.v(TAG, "FAILED LOADING STEPS");
         }
@@ -61,7 +57,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
         ButterKnife.bind(this);
 
-        mAdapter = new RecipeDetailsAdapter(this, stepArrayList, RecipeDetailsActivity.this);
+        mAdapter = new RecipeDetailsAdapter(this, stepList, RecipeDetailsActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecipeDetailsActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -71,10 +67,11 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     public void onClick(int adapterPosition) {
         Context context = this;
         Class stepDetailsClass = StepDetailsActivity.class;
-        StepDetailsActivity.recipes = recipeArrayList.get(adapterPosition);
+        // StepDetailsActivity.recipes = recipeArrayList.get(adapterPosition);
+        StepDetailsActivity.steps = stepList.get(adapterPosition);
 
         Intent stepDetailsIntent = new Intent(context, stepDetailsClass);
-        stepDetailsIntent.putParcelableArrayListExtra(MY_RECIPE, recipeArrayList);
+        // stepDetailsIntent.putParcelableArrayListExtra(MY_RECIPE, recipeArrayList);
         startActivity(stepDetailsIntent);
     }
 }
