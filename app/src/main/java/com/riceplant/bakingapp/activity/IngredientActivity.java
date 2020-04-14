@@ -37,10 +37,10 @@ public class IngredientActivity extends AppCompatActivity implements IngredientA
     private IngredientAdapter mAdapter;
 
     @Nullable
-    @BindView(R.id.ingredients)
+    @BindView(R.id.ingredient_detail_list)
     TextView ingredientsTV;
     @Nullable
-    @BindView(R.id.quantity)
+    @BindView(R.id.quantity_detail_list)
     TextView quantityTV;
     @BindView(R.id. recipe_details_rv)
     RecyclerView mRecyclerView;

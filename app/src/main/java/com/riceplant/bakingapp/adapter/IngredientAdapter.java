@@ -34,12 +34,12 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     }
 
     public class IngredientAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.ingredients)
+        @BindView(R.id.ingredient_detail_list)
         TextView ingredientTextView;
-        @BindView(R.id.measure)
-        TextView stepsDescriptionTextView;
-        @BindView(R.id.quantity)
+        @BindView(R.id.quantity_detail_list)
         TextView quantityDescriptionTextView;
+        @BindView(R.id.measure_detail_list)
+        TextView measureTextView;
 
         public IngredientAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,9 +63,9 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
 
     @Override
     public void onBindViewHolder(@NonNull IngredientAdapterViewHolder holder, int position) {
-        holder.ingredientTextView.setText(mIngredient.get(position).getIngredient());
-        holder.stepsDescriptionTextView.setText(mIngredient.get(position).getQuantity().toString());
-        holder.quantityDescriptionTextView.setText(mIngredient.get(position).getMeasure());
+        holder.ingredientTextView.setText("- " + mIngredient.get(position).getIngredient());
+        holder.measureTextView.setText(mIngredient.get(position).getMeasure());
+        holder.quantityDescriptionTextView.setText(mIngredient.get(position).getQuantity().toString());
 
     }
 

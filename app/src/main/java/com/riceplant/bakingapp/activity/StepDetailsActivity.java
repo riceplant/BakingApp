@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -34,10 +35,8 @@ import static com.riceplant.bakingapp.activity.RecipeActivity.MY_RECIPE;
 public class StepDetailsActivity extends AppCompatActivity {
     public static final String TAG = StepDetailsActivity.class.getSimpleName();
 
-    public static Recipe recipes;
     public static Step steps;
-    private ArrayList<Recipe> recipeArrayList;
-    private String recipeName;
+    private String shortDescription;
     private String videoURL;
     private String mDescription;
     private Uri uri;
@@ -51,20 +50,21 @@ public class StepDetailsActivity extends AppCompatActivity {
     PlayerView playerView;
     @BindView(R.id.step_detail_description)
     TextView descriptionView;
+    @BindView(R.id.placeholder_image_view)
+    ImageView placeholderView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps_detail);
 
-        Intent intentToCatch = getIntent();
-        // recipeArrayList = intentToCatch.getParcelableArrayListExtra(MY_RECIPE);
-
         videoURL = steps.getVideoURL();
         mDescription = steps.getDescription();
+        shortDescription = steps.getShortDescription();
 
         ButterKnife.bind(this);
         descriptionView.setText(mDescription);
+        setTitle(shortDescription);
     }
 
     @Override
@@ -78,7 +78,6 @@ public class StepDetailsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        hideSystemUi();
         if (Util.SDK_INT < 24 || player == null) {
             initializePlayer();
         }
@@ -114,9 +113,12 @@ public class StepDetailsActivity extends AppCompatActivity {
         player = ExoPlayerFactory.newSimpleInstance(this);
         playerView.setPlayer(player);
         if (videoURL != null) {
+            placeholderView.setVisibility(View.GONE);
             uri = Uri.parse(videoURL);
-        } else {
-            playerView.setVisibility(View.INVISIBLE);
+        }
+        if (videoURL.equals("")) {
+            placeholderView.setVisibility(View.VISIBLE);
+            playerView.setVisibility(View.GONE);
         }
         MediaSource mediaSource = buildMediaSource(uri);
         player.setPlayWhenReady(playWhenReady);
@@ -128,15 +130,5 @@ public class StepDetailsActivity extends AppCompatActivity {
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, "BakingApp");
         return new ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(uri);
-    }
-
-    @SuppressLint("InlinedApi")
-    private void hideSystemUi() {
-        playerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 }
