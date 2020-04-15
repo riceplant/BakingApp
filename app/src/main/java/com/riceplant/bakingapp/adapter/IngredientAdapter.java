@@ -33,13 +33,13 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
         void onClick(int adapterPosition);
     }
 
-    public class IngredientAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        @BindView(R.id.ingredients)
+    public class IngredientAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.ingredient_detail_list)
         TextView ingredientTextView;
-        @BindView(R.id.measure)
-        TextView stepsDescriptionTextView;
-        @BindView(R.id.quantity)
+        @BindView(R.id.quantity_detail_list)
         TextView quantityDescriptionTextView;
+        @BindView(R.id.measure_detail_list)
+        TextView measureTextView;
 
         public IngredientAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,15 +57,15 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     @Override
     public IngredientAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recipe_details_list_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.ingredient_list_item, parent, false);
         return new IngredientAdapterViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull IngredientAdapterViewHolder holder, int position) {
-        holder.ingredientTextView.setText(mIngredient.get(position).getIngredient());
-        holder.stepsDescriptionTextView.setText(mIngredient.get(position).getQuantity().toString());
-        holder.quantityDescriptionTextView.setText(mIngredient.get(position).getMeasure());
+        holder.ingredientTextView.setText("- " + mIngredient.get(position).getIngredient());
+        holder.quantityDescriptionTextView.setText("(" + mIngredient.get(position).getQuantity().toString());
+        holder.measureTextView.setText(mIngredient.get(position).getMeasure()+ ")");
 
     }
 

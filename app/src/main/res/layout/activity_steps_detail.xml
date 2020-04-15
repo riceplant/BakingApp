@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/exo_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="8dp"/>
+
+    <ImageView
+        android:id="@+id/placeholder_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/baking_image"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/step_detail_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        tools:text="description"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/step_detail_prev_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="Previous Step"/>
+
+        <Button
+            android:id="@+id/step_detail_next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="Next Step"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

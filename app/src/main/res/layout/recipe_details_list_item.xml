@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="6dp">
+    android:background="#D3D3D3"
+    android:padding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,75 +14,39 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/steps_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="Ingredient: "
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/ingredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:gravity="end"
                 android:padding="8dp"
                 android:textAlignment="textEnd"
-                tools:text="Graham Butter Crumbs" />
+                tools:text="0." />
+
+            <TextView
+                android:id="@+id/steps_short_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                tools:text="Description" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="Measure: "
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/measure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="8dp"
-                android:textAlignment="textEnd"
-                tools:text="CUP" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="Quantity: "
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="8dp"
-                android:textAlignment="textEnd"
-                tools:text="2.0" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
         </LinearLayout>
     </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>
