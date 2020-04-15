@@ -64,8 +64,8 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     @Override
     public void onBindViewHolder(@NonNull IngredientAdapterViewHolder holder, int position) {
         holder.ingredientTextView.setText("- " + mIngredient.get(position).getIngredient());
-        holder.measureTextView.setText(mIngredient.get(position).getMeasure());
-        holder.quantityDescriptionTextView.setText(mIngredient.get(position).getQuantity().toString());
+        holder.quantityDescriptionTextView.setText("(" + mIngredient.get(position).getQuantity().toString());
+        holder.measureTextView.setText(mIngredient.get(position).getMeasure()+ ")");
 
     }
 

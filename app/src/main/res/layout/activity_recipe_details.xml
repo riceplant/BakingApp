@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ingredients:"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:background="@drawable/layout_bg"
+        android:paddingLeft="8dp"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -18,11 +20,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
-        android:background="@color/colorPrimary"/>
+        android:background="@drawable/layout_bg"
+        android:paddingLeft="8dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_details_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"/>
 
 </LinearLayout>
