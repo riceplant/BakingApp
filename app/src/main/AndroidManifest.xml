@@ -29,10 +29,6 @@
             android:name=".activity.StepDetailsActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".activity.RecipeDetailsActivity" />
-        <activity
-            android:name=".activity.IngredientActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".activity.RecipeActivity" />
     </application>
 
 </manifest>

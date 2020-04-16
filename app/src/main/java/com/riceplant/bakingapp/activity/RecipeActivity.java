@@ -74,7 +74,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
     public void onClick(int adapterPosition) {
         Context context = this;
         Class detailClass = RecipeDetailsActivity.class;
-        IngredientActivity.recipes = recipes.get(adapterPosition);
         RecipeDetailsActivity.recipes = recipes.get(adapterPosition);
 
         Intent detailsIntent = new Intent(context, detailClass);

@@ -63,12 +63,12 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
         ButterKnife.bind(this);
 
-        mAdapter = new RecipeDetailsAdapter(this, stepList, RecipeDetailsActivity.this);
+        mAdapter = new RecipeDetailsAdapter(stepList, RecipeDetailsActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecipeDetailsActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        ingredientAdapter = new IngredientAdapter(this, ingredientList, RecipeDetailsActivity.this);
+        ingredientAdapter = new IngredientAdapter(ingredientList, RecipeDetailsActivity.this);
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(RecipeDetailsActivity.this);
         ingredientRecyclerView.setLayoutManager(layoutManager1);
         ingredientRecyclerView.setAdapter(ingredientAdapter);
