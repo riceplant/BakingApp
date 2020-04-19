@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,19 +48,16 @@ public class StepDetailsFragment extends Fragment {
     @BindView(R.id.placeholder_image_view)
     ImageView placeholderView;
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_steps_detail, container, false);
 
-        videoURL = steps.getVideoURL();
-        mDescription = steps.getDescription();
-        shortDescription = steps.getShortDescription();
+        if (steps != null) {
+            videoURL = steps.getVideoURL();
+            mDescription = steps.getDescription();
+            shortDescription = steps.getShortDescription();
+        }
 
         ButterKnife.bind(this, view);
         descriptionView.setText(mDescription);
@@ -112,14 +110,14 @@ public class StepDetailsFragment extends Fragment {
     private void initializePlayer() {
         player = ExoPlayerFactory.newSimpleInstance(getActivity());
         playerView.setPlayer(player);
-        if (videoURL != null) {
-            placeholderView.setVisibility(View.GONE);
-            uri = Uri.parse(videoURL);
-        }
-        if (videoURL.equals("")) {
-            placeholderView.setVisibility(View.VISIBLE);
-            playerView.setVisibility(View.GONE);
-        }
+//        if (videoURL != null) {
+//            placeholderView.setVisibility(View.GONE);
+//            uri = Uri.parse(videoURL);
+//        }
+//        if (videoURL.equals("")) {
+//            placeholderView.setVisibility(View.VISIBLE);
+//            playerView.setVisibility(View.GONE);
+//        }
         MediaSource mediaSource = buildMediaSource(uri);
         player.setPlayWhenReady(playWhenReady);
         player.seekTo(currentWindow, playbackPosition);
