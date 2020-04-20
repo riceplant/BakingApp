@@ -1,13 +1,11 @@
 package com.riceplant.bakingapp.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +55,8 @@ public class StepDetailsFragment extends Fragment {
             videoURL = steps.getVideoURL();
             mDescription = steps.getDescription();
             shortDescription = steps.getShortDescription();
+        } else {
+            videoURL = "";
         }
 
         ButterKnife.bind(this, view);
@@ -110,14 +110,14 @@ public class StepDetailsFragment extends Fragment {
     private void initializePlayer() {
         player = ExoPlayerFactory.newSimpleInstance(getActivity());
         playerView.setPlayer(player);
-//        if (videoURL != null) {
-//            placeholderView.setVisibility(View.GONE);
-//            uri = Uri.parse(videoURL);
-//        }
-//        if (videoURL.equals("")) {
-//            placeholderView.setVisibility(View.VISIBLE);
-//            playerView.setVisibility(View.GONE);
-//        }
+        if (videoURL != null) {
+            placeholderView.setVisibility(View.GONE);
+            uri = Uri.parse(videoURL);
+        }
+        if (videoURL.equals("")) {
+            placeholderView.setVisibility(View.VISIBLE);
+            playerView.setVisibility(View.GONE);
+        }
         MediaSource mediaSource = buildMediaSource(uri);
         player.setPlayWhenReady(playWhenReady);
         player.seekTo(currentWindow, playbackPosition);

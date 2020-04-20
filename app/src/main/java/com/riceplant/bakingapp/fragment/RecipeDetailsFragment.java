@@ -3,14 +3,16 @@ package com.riceplant.bakingapp.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +29,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.riceplant.bakingapp.activity.RecipeDetailsActivity.isTwoPane;
+import static com.riceplant.bakingapp.fragment.StepDetailsFragment.steps;
 
 public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdapter.RecipeDetailsAdapterOnClickHandler, IngredientAdapter.IngredientAdapterOnClickHandler {
     RecipeDetailsAdapter mAdapter;
@@ -78,10 +83,21 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
 
     @Override
     public void onClick(int adapterPosition) {
-        Class stepDetailsClass = StepDetailsActivity.class;
-        StepDetailsActivity.steps = stepList.get(adapterPosition);
+        if (isTwoPane) {
+            steps = stepList.get(adapterPosition);
 
-        Intent stepDetailsIntent = new Intent(getActivity(), stepDetailsClass);
-        startActivity(stepDetailsIntent);
+            FragmentManager fragmentManager;
+            fragmentManager = getFragmentManager();
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.detailContainer, new StepDetailsFragment())
+                    .commit();
+        } else {
+            Class stepDetailsClass = StepDetailsActivity.class;
+            StepDetailsActivity.steps = stepList.get(adapterPosition);
+
+            Intent stepDetailsIntent = new Intent(getActivity(), stepDetailsClass);
+            startActivity(stepDetailsIntent);
+        }
     }
 }

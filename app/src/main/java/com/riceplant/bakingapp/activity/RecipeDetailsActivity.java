@@ -32,13 +32,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     public static final String TAG = RecipeDetailsActivity.class.getSimpleName();
 
     public static Recipe recipes;
-    private boolean isTwoPane;
+    public static boolean isTwoPane;
     private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
+        getSupportActionBar().setTitle(recipes.getName());
+
         fragmentManager = getSupportFragmentManager();
 
         if (findViewById(R.id.detailContainer) != null) {
@@ -58,6 +60,5 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     .replace(R.id.detailContainer, new StepDetailsFragment())
                     .commit();
         }
-
     }
 }
