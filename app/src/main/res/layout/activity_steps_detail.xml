@@ -25,27 +25,4 @@
         android:padding="8dp"
         tools:text="description"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/step_detail_prev_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="Previous Step"/>
-
-        <Button
-            android:id="@+id/step_detail_next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="Next Step"/>
-
-
-    </LinearLayout>
-
 </LinearLayout>

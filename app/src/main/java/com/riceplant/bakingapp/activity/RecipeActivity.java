@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.riceplant.bakingapp.R;
 import com.riceplant.bakingapp.adapter.RecipeAdapter;
+import com.riceplant.bakingapp.fragment.RecipeDetailsFragment;
 import com.riceplant.bakingapp.model.Recipe;
 import com.riceplant.bakingapp.network.RecipeClient;
 import com.riceplant.bakingapp.network.RecipeService;
@@ -74,8 +75,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
     public void onClick(int adapterPosition) {
         Context context = this;
         Class detailClass = RecipeDetailsActivity.class;
-        IngredientActivity.recipes = recipes.get(adapterPosition);
         RecipeDetailsActivity.recipes = recipes.get(adapterPosition);
+        RecipeDetailsFragment.recipes = recipes.get(adapterPosition);
 
         Intent detailsIntent = new Intent(context, detailClass);
         startActivity(detailsIntent);

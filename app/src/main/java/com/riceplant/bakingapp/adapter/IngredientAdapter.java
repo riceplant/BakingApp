@@ -20,11 +20,9 @@ import butterknife.ButterKnife;
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientAdapterViewHolder> {
 
     private List<Ingredient> mIngredient;
-    private Context mContext;
     private IngredientAdapterOnClickHandler mOnClickHandler;
 
-    public IngredientAdapter(Context context, List<Ingredient> ingredientList, IngredientAdapterOnClickHandler onClickHandler) {
-        mContext = context;
+    public IngredientAdapter(List<Ingredient> ingredientList, IngredientAdapterOnClickHandler onClickHandler) {
         mIngredient = ingredientList;
         mOnClickHandler = onClickHandler;
     }
