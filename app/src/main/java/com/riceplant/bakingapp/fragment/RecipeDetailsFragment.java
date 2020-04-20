@@ -52,7 +52,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsAdap
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_recipe_details, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
         ButterKnife.bind(this, rootView);
 
         stepList = recipes.getSteps();
